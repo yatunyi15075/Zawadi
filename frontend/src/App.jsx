@@ -97,7 +97,7 @@ const App = () => {
         <Route exact path="/teacher/settings" element={<TeacherProfileSection />} />
         <Route exact path="/teacher/attendance" element={<CheckAttendanceSection />} />
         <Route exact path="/teacher/lesson-plans" element={<LessonPlans />} />
-        <Route exact path="/teacher/settings" element={<StudentProgress />} />
+        <Route exact path="/teacher/students-progress" element={<StudentProgress />} />
 
         {/* parents section routes */}
         <Route exact path="/parents/attendance" element={<Attendance />} />
