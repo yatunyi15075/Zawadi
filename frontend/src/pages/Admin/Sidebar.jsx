@@ -115,6 +115,10 @@ const Sidebar = () => {
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/curriculum-management">Curriculum Management</StyledLink>
         </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon><BsChatDots /></SidebarIcon>
+          <StyledLink to="/admin/analytics">Analytics</StyledLink>
+        </SidebarNavItem>
 
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
