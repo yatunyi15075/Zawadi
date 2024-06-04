@@ -105,12 +105,16 @@ const Sidebar = () => {
           <StyledLink to="/teacher/students-progress">Students Progress</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
+          <SidebarIcon><BsPeople /></SidebarIcon>
+          <StyledLink to="/teacher/students-progress">Assessments</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
           <StyledLink to="/teacher/assignments">Assignments</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsGraphDown /></SidebarIcon>
-          <StyledLink to="/teacher/performance">Performance</StyledLink>
+          <StyledLink to="/teacher/performance">Performance Data</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
