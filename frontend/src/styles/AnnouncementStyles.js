@@ -79,3 +79,11 @@ export const AnnouncementTitle = styled.h3`
   margin-bottom: 10px;
 `;
 
+// Add this export for the Select component
+export const Select = styled.select`
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
