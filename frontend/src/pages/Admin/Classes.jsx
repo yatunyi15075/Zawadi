@@ -12,10 +12,12 @@ import {
   AddClassForm,
   AddClassInput,
   AddClassButton,
+  Select,
 } from '../../styles/ClassesStyles';
 
 const Classes = () => {
   const [newClassName, setNewClassName] = useState('');
+  const [newClassCategory, setNewClassCategory] = useState('Early Years');
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
@@ -39,7 +41,10 @@ const Classes = () => {
     e.preventDefault();
     if (newClassName.trim() !== '') {
       try {
-        const response = await axios.post('http://localhost:4000/api/v1/class', { grade: newClassName });
+        const response = await axios.post('http://localhost:4000/api/v1/class', { 
+          grade: newClassName, 
+          category: newClassCategory 
+        });
         console.log('Response data:', response.data); // Log the response data
         setClasses(prevClasses => {
           if (Array.isArray(prevClasses)) {
@@ -50,6 +55,7 @@ const Classes = () => {
           }
         });
         setNewClassName('');
+        setNewClassCategory('Early Years');
       } catch (error) {
         console.error('Error adding class:', error);
       }
@@ -69,12 +75,22 @@ const Classes = () => {
               value={newClassName}
               onChange={(e) => setNewClassName(e.target.value)}
             />
+            <Select
+              value={newClassCategory}
+              onChange={(e) => setNewClassCategory(e.target.value)}
+            >
+              <option value="Early Years">Early Years</option>
+              <option value="Middle School">Middle School</option>
+              <option value="Junior Secondary">Junior Secondary</option>
+            </Select>
             <AddClassButton type="submit">Add Class</AddClassButton>
           </AddClassForm>
           <ClassList>
             {/* Ensure that classes is an array before mapping over it */}
             {Array.isArray(classes) && classes.map((classItem, index) => (
-              <ClassItem key={index}>{classItem.grade}</ClassItem>
+              <ClassItem key={index}>
+                {classItem.grade} ({classItem.category})
+              </ClassItem>
             ))}
           </ClassList>
         </ClassesContent>

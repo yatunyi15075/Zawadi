@@ -12,14 +12,17 @@ import {
   AddTeacherForm,
   AddTeacherInput,
   AddTeacherButton,
+  Select,
 } from '../../styles/TeachersStyles'; // Import styled components from TeachersStyles.js
 
 const Teachers = () => {
-  const [newTeacher, setNewTeacher] = useState({ name: '', email: '', subject: '' });
+  const [newTeacher, setNewTeacher] = useState({ name: '', email: '', subject: '', phoneNumber: '', classes: [] });
   const [teachers, setTeachers] = useState([]);
+  const [availableClasses, setAvailableClasses] = useState([]);
 
   useEffect(() => {
     fetchTeachers();
+    fetchClasses();
   }, []);
 
   const fetchTeachers = async () => {
@@ -31,18 +34,33 @@ const Teachers = () => {
     }
   };
 
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      setAvailableClasses(response.data.classes);
+    } catch (error) {
+      console.error('Error fetching classes:', error);
+    }
+  };
+
   const handleAddTeacher = async (e) => {
     e.preventDefault();
-    if (newTeacher.name.trim() !== '' && newTeacher.email.trim() !== '' && newTeacher.subject.trim() !== '') {
+    const { name, email, subject, phoneNumber, classes } = newTeacher;
+    if (name.trim() !== '' && email.trim() !== '' && subject.trim() !== '' && phoneNumber.trim() !== '' && classes.length > 0) {
       try {
         const response = await axios.post('http://localhost:4000/api/v1/teachers', newTeacher);
         const createdTeacher = response.data.teacher;
         setTeachers([...teachers, createdTeacher]);
-        setNewTeacher({ name: '', email: '', subject: '' });
+        setNewTeacher({ name: '', email: '', subject: '', phoneNumber: '', classes: [] });
       } catch (error) {
         console.error('Error adding teacher:', error);
       }
     }
+  };
+
+  const handleClassChange = (e) => {
+    const selectedClasses = Array.from(e.target.selectedOptions, (option) => option.value);
+    setNewTeacher({ ...newTeacher, classes: selectedClasses });
   };
 
   return (
@@ -70,11 +88,24 @@ const Teachers = () => {
               value={newTeacher.subject}
               onChange={(e) => setNewTeacher({ ...newTeacher, subject: e.target.value })}
             />
+            <AddTeacherInput
+              type="text"
+              placeholder="Enter teacher phone number"
+              value={newTeacher.phoneNumber}
+              onChange={(e) => setNewTeacher({ ...newTeacher, phoneNumber: e.target.value })}
+            />
+            <Select multiple value={newTeacher.classes} onChange={handleClassChange}>
+              {availableClasses.map((classItem) => (
+                <option key={classItem._id} value={classItem.grade}>{classItem.grade}</option>
+              ))}
+            </Select>
             <AddTeacherButton type="submit">Add Teacher</AddTeacherButton>
           </AddTeacherForm>
           <TeacherList>
             {teachers.map((teacher) => (
-              <TeacherItem key={teacher.id}>{teacher.name} - {teacher.email} - {teacher.subject}</TeacherItem>
+              <TeacherItem key={teacher.id}>
+                {teacher.name} - {teacher.email} - {teacher.subject} - {teacher.phoneNumber} - {teacher.classes.join(', ')}
+              </TeacherItem>
             ))}
           </TeacherList>
         </TeachersContent>

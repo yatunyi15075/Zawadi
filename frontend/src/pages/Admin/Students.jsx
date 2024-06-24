@@ -12,14 +12,24 @@ import {
   AddStudentForm,
   AddStudentInput,
   AddStudentButton,
+  Select,
 } from '../../styles/StudentsStyles'; 
 
 const Students = () => {
-  const [newStudent, setNewStudent] = useState({ name: '', registrationNumber: '', grade: '' });
+  const [newStudent, setNewStudent] = useState({
+    name: '',
+    registrationNumber: '',
+    grade: '',
+    parentName: '',
+    parentEmail: '',
+    parentPhone: ''
+  });
   const [students, setStudents] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   useEffect(() => {
     fetchStudents();
+    fetchClasses();
   }, []);
 
   const fetchStudents = async () => {
@@ -31,13 +41,30 @@ const Students = () => {
     }
   };
 
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      setClasses(response.data.classes);
+    } catch (error) {
+      console.error('Error fetching classes:', error);
+    }
+  };
+
   const handleAddStudent = async (e) => {
     e.preventDefault();
-    if (newStudent.name.trim() !== '' && newStudent.registrationNumber.trim() !== '' && newStudent.grade.trim() !== '') {
+    const { name, registrationNumber, grade, parentName, parentEmail, parentPhone } = newStudent;
+    if (name.trim() !== '' && registrationNumber.trim() !== '' && grade.trim() !== '' && parentName.trim() !== '' && parentEmail.trim() !== '' && parentPhone.trim() !== '') {
       try {
         const response = await axios.post('http://localhost:4000/api/v1/students', newStudent);
         setStudents([...students, response.data.student]);
-        setNewStudent({ name: '', registrationNumber: '', grade: '' });
+        setNewStudent({
+          name: '',
+          registrationNumber: '',
+          grade: '',
+          parentName: '',
+          parentEmail: '',
+          parentPhone: ''
+        });
       } catch (error) {
         console.error('Error adding student:', error);
       }
@@ -63,17 +90,40 @@ const Students = () => {
               value={newStudent.registrationNumber}
               onChange={(e) => setNewStudent({ ...newStudent, registrationNumber: e.target.value })}
             />
-            <AddStudentInput
-              type="text"
-              placeholder="Enter grade"
+            <Select
               value={newStudent.grade}
               onChange={(e) => setNewStudent({ ...newStudent, grade: e.target.value })}
+            >
+              <option value="" disabled>Select class</option>
+              {classes.map((classItem) => (
+                <option key={classItem._id} value={classItem.grade}>{classItem.grade}</option>
+              ))}
+            </Select>
+            <AddStudentInput
+              type="text"
+              placeholder="Enter parent/guardian name"
+              value={newStudent.parentName}
+              onChange={(e) => setNewStudent({ ...newStudent, parentName: e.target.value })}
+            />
+            <AddStudentInput
+              type="email"
+              placeholder="Enter parent/guardian email"
+              value={newStudent.parentEmail}
+              onChange={(e) => setNewStudent({ ...newStudent, parentEmail: e.target.value })}
+            />
+            <AddStudentInput
+              type="text"
+              placeholder="Enter parent/guardian phone number"
+              value={newStudent.parentPhone}
+              onChange={(e) => setNewStudent({ ...newStudent, parentPhone: e.target.value })}
             />
             <AddStudentButton type="submit">Add Student</AddStudentButton>
           </AddStudentForm>
           <StudentList>
             {students.map((student) => (
-              <StudentItem key={student.id}>{student.name} - {student.registrationNumber} - {student.grade}</StudentItem>
+              <StudentItem key={student.id}>
+                {student.name} - {student.registrationNumber} - {student.grade} - {student.parentName} - {student.parentEmail} - {student.parentPhone}
+              </StudentItem>
             ))}
           </StudentList>
         </StudentsContent>
