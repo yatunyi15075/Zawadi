@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdminRegisterContainer, FormContainer, InputField, SubmitButton } from '../styles/AdminRegisterStyles';
+import { AdminRegisterContainer, FormContainer, InputField, SubmitButton } from '../../styles/AdminRegisterStyles';
 import axios from 'axios'; // Import axios
 
 const AdminRegister = () => {

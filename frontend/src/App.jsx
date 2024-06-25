@@ -1,13 +1,13 @@
 // App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from '../src/components/Home.jsx';
+import Home from '../src/components/Home/Home.jsx';
 import ChooseUser from '../src/components/ChooseUser';
 
 // Signin and Register
-import AdminSignIn from '../src/components/AdminSignIn';
-import StudentSignIn from '../src/components/StudentSignIn';
-import TeacherSignIn from '../src/components/TeacherSignIn';
+import AdminSignIn from '../src/auth/Admin/AdminSignIn.jsx';
+import StudentSignIn from '../src/auth/Student/StudentSignIn.jsx';
+import TeacherSignIn from '../src/auth/Teacher/TeacherSignIn.jsx';
 
 // Dashboards
 import AdminDashboard from '../src/pages/Admin/Dashboard';

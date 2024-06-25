@@ -1,7 +1,7 @@
 // PricingSection.js
 import React from 'react';
 import styled from 'styled-components';
-import bg from '../assets/bg.png'
+import bg from "../../assets/bg.png";
 
 const PricingContainer = styled.div`
   text-align: center;
