@@ -40,6 +40,8 @@ import TeacherProfileSection from '../src/pages/Teachers/Profile';
 import CheckAttendanceSection from './pages/Teachers/Attendance.jsx';
 import LessonPlans from './pages/Teachers/LessonPlans.jsx';
 import StudentProgress from './pages/Teachers/StudentProgress.jsx';
+import Assessments from './pages/Teachers/Assessments.jsx';
+import Performance from './pages/Teachers/Performance.jsx';
 
 // Parents
 import Attendance from './pages/Parents/Attendance.jsx';
@@ -99,6 +101,8 @@ const App = () => {
         <Route exact path="/teacher/attendance" element={<Layout><CheckAttendanceSection /></Layout>} />
         <Route exact path="/teacher/lesson-plans" element={<Layout><LessonPlans /></Layout>} />
         <Route exact path="/teacher/students-progress" element={<Layout><StudentProgress /></Layout>} />
+        <Route exact path="/teacher/assessments" element={<Layout><Assessments /></Layout>} />
+        <Route exact path="/teacher/performance" element={<Layout><Performance /></Layout>} />
 
         {/* Parents section routes */}
         <Route exact path="/parents/attendance" element={<Layout><Attendance /></Layout>} />
