@@ -113,6 +113,14 @@ const StudentSidebar = () => {
           <StyledLink to="/student/learning-materials">Learning Materials</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
+          <SidebarIcon><BsPeople /></SidebarIcon>
+          <StyledLink to="/student/attendence">Attendence</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon><BsPerson /></SidebarIcon>
+          <StyledLink to="/student/communication">Communication</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/student/settings">Profile</StyledLink>
         </SidebarNavItem>

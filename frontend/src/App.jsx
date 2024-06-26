@@ -32,6 +32,9 @@ import ProfileSection from '../src/pages/Students/Profile';
 import Feedback from './pages/Students/Feedback.jsx';
 import Grades from './pages/Students/Grades.jsx';
 import LearningMaterials from './pages/Students/LearningMaterials.jsx';
+import Attendance from './pages/Parents/Attendance.jsx';
+import Communication from './pages/Parents/Communication.jsx';
+
 
 // Teachers
 import AssignmentSection from '../src/pages/Teachers/Assignments';
@@ -43,11 +46,11 @@ import StudentProgress from './pages/Teachers/StudentProgress.jsx';
 import Assessments from './pages/Teachers/Assessments.jsx';
 import Performance from './pages/Teachers/Performance.jsx';
 
-// Parents
-import Attendance from './pages/Parents/Attendance.jsx';
-import ChildProgress from './pages/Parents/ChildProgress.jsx';
-import Communication from './pages/Parents/Communication.jsx';
-import ChildGrades from './pages/Parents/Grades.jsx';
+// // Parents
+// import Attendance from './pages/Parents/Attendance.jsx';
+// import ChildProgress from './pages/Parents/ChildProgress.jsx';
+// import Communication from './pages/Parents/Communication.jsx';
+// import ChildGrades from './pages/Parents/Grades.jsx';
 
 // Super-admin
 import AdvancedAnalytics from './pages/SuperAdminDashboard/AdvancedAnalytics.jsx';
@@ -93,6 +96,9 @@ const App = () => {
         <Route exact path="/student/feedback" element={<Layout><Feedback /></Layout>} />
         <Route exact path="/student/grades" element={<Layout><Grades /></Layout>} />
         <Route exact path="/student/learning-materials" element={<Layout><LearningMaterials /></Layout>} />
+        <Route exact path="/student/attendence" element={<Layout><Attendance /></Layout>} />
+        <Route exact path="/student/communication" element={<Layout><Communication /></Layout>} />
+
 
         {/* Teacher section routes */}
         <Route exact path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
@@ -103,12 +109,11 @@ const App = () => {
         <Route exact path="/teacher/students-progress" element={<Layout><StudentProgress /></Layout>} />
         <Route exact path="/teacher/assessments" element={<Layout><Assessments /></Layout>} />
         <Route exact path="/teacher/performance" element={<Layout><Performance /></Layout>} />
+        
 
         {/* Parents section routes */}
-        <Route exact path="/parents/attendance" element={<Layout><Attendance /></Layout>} />
-        <Route exact path="/parents/child-progress" element={<Layout><ChildProgress /></Layout>} />
-        <Route exact path="/parents/communication" element={<Layout><Communication /></Layout>} />
-        <Route exact path="/parents/child-grades" element={<Layout><ChildGrades /></Layout>} />
+{/* 
+        <Route exact path="/parents/child-grades" element={<Layout><ChildGrades /></Layout>} /> */}
 
         {/* Super-admin routes */}
         <Route exact path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
