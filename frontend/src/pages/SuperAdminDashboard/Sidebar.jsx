@@ -98,7 +98,7 @@ const SuperAdminSidebar = () => {
       </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/super-admin/analytcs">Advanced Analytics</StyledLink>
+          <StyledLink to="/super-admin/advanced-analytics">Advanced Analytics</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
@@ -110,7 +110,7 @@ const SuperAdminSidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
-          <StyledLink to="/admin/settings">Settings</StyledLink>
+          <StyledLink to="/super-admin/system-settings">Settings</StyledLink>
         </SidebarNavItem>
         </SidebarNav>
       <ToggleButton onClick={toggleSidebar}>

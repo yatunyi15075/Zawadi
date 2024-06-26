@@ -57,6 +57,7 @@ import AdvancedAnalytics from './pages/SuperAdminDashboard/AdvancedAnalytics.jsx
 import IntergrationOptions from './pages/SuperAdminDashboard/IntergrationOptions.jsx';
 import SystemSettings from './pages/SuperAdminDashboard/SystemSettings.jsx';
 import UserManagement from './pages/SuperAdminDashboard/UserManagement.jsx';
+import AllSchools from './pages/SuperAdminDashboard/AllSchools.jsx';
 
 // Layout
 import Layout from './Layout';
@@ -99,7 +100,6 @@ const App = () => {
         <Route exact path="/student/attendence" element={<Layout><Attendance /></Layout>} />
         <Route exact path="/student/communication" element={<Layout><Communication /></Layout>} />
 
-
         {/* Teacher section routes */}
         <Route exact path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
         <Route exact path="/teacher/communication" element={<Layout><CheckAnnouncementSection /></Layout>} />
@@ -120,6 +120,7 @@ const App = () => {
         <Route exact path="/super-admin/intergration-options" element={<Layout><IntergrationOptions /></Layout>} />
         <Route exact path="/super-admin/system-settings" element={<Layout><SystemSettings /></Layout>} />
         <Route exact path="/super-admin/user-management" element={<Layout><UserManagement /></Layout>} />
+        <Route exact path="/super-admin/schools" element={<Layout><AllSchools /></Layout>} />
       </Routes>
     </Router>
   );
