@@ -35,7 +35,6 @@ import LearningMaterials from './pages/Students/LearningMaterials.jsx';
 import Attendance from './pages/Parents/Attendance.jsx';
 import Communication from './pages/Parents/Communication.jsx';
 
-
 // Teachers
 import AssignmentSection from '../src/pages/Teachers/Assignments';
 import CheckAnnouncementSection from '../src/pages/Teachers/Announcement';
@@ -46,18 +45,14 @@ import StudentProgress from './pages/Teachers/StudentProgress.jsx';
 import Assessments from './pages/Teachers/Assessments.jsx';
 import Performance from './pages/Teachers/Performance.jsx';
 
-// // Parents
-// import Attendance from './pages/Parents/Attendance.jsx';
-// import ChildProgress from './pages/Parents/ChildProgress.jsx';
-// import Communication from './pages/Parents/Communication.jsx';
-// import ChildGrades from './pages/Parents/Grades.jsx';
-
 // Super-admin
 import AdvancedAnalytics from './pages/SuperAdminDashboard/AdvancedAnalytics.jsx';
 import IntergrationOptions from './pages/SuperAdminDashboard/IntergrationOptions.jsx';
 import SystemSettings from './pages/SuperAdminDashboard/SystemSettings.jsx';
 import UserManagement from './pages/SuperAdminDashboard/UserManagement.jsx';
 import AllSchools from './pages/SuperAdminDashboard/AllSchools.jsx';
+import AddSchoolForm from './pages/SuperAdminDashboard/AddSchoolForm.jsx';
+import AllSchoolsList from './pages/SuperAdminDashboard/AllSchoolsList.jsx';
 
 // Layout
 import Layout from './Layout';
@@ -109,11 +104,6 @@ const App = () => {
         <Route exact path="/teacher/students-progress" element={<Layout><StudentProgress /></Layout>} />
         <Route exact path="/teacher/assessments" element={<Layout><Assessments /></Layout>} />
         <Route exact path="/teacher/performance" element={<Layout><Performance /></Layout>} />
-        
-
-        {/* Parents section routes */}
-{/* 
-        <Route exact path="/parents/child-grades" element={<Layout><ChildGrades /></Layout>} /> */}
 
         {/* Super-admin routes */}
         <Route exact path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
@@ -121,6 +111,8 @@ const App = () => {
         <Route exact path="/super-admin/system-settings" element={<Layout><SystemSettings /></Layout>} />
         <Route exact path="/super-admin/user-management" element={<Layout><UserManagement /></Layout>} />
         <Route exact path="/super-admin/schools" element={<Layout><AllSchools /></Layout>} />
+        <Route exact path="/super-admin/schools/add-school" element={<Layout><AddSchoolForm /></Layout>} />
+        <Route exact path="/super-admin/schools/all-schools" element={<Layout><AllSchoolsList /></Layout>} />
       </Routes>
     </Router>
   );
