@@ -16,3 +16,4 @@ router.put('/:id', updateTimetable);
 router.delete('/:id', deleteTimetable);
 
 export default router;
+
