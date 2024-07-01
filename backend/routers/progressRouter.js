@@ -5,7 +5,7 @@ import {
   getProgressById,
   updateProgress,
   deleteProgress,
-} from '../controllers/progressController.js';
+} from '../controllers/progressControllers.js';
 
 const router = express.Router();
 

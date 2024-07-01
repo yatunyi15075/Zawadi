@@ -5,7 +5,7 @@ import {
   getAttendanceRecordById,
   updateAttendanceRecord,
   deleteAttendanceRecord,
-} from '../controllers/attendanceRecordController.js';
+} from '../controllers/attendanceRecordControllers.js';
 
 const router = express.Router();
 

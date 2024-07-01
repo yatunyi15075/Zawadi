@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import Class from './Class.js'; // Assuming Class model is imported correctly
+import config from '../config.js';
+import Class from './classModel.js'; // Assuming Class model is imported correctly
+
+const { sequelize } = config;
 
 const Timetable = sequelize.define('Timetable', {
   id: {

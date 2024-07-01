@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAllSchools, createSchool, getSchoolById, updateSchool, deleteSchool } from '../controllers/schoolController.js';
+import { getAllSchools, createSchool, getSchoolById, updateSchool, deleteSchool } 
+from '../controllers/schoolControllers.js';
 
 const router = express.Router();
 

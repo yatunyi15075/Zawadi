@@ -1,4 +1,4 @@
-import LessonPlan from '../models/LessonPlan.js';
+import LessonPlan from '../models/lessonPlansModel.js';
 
 // Create Lesson Plan
 export const createLessonPlan = async (req, res) => {

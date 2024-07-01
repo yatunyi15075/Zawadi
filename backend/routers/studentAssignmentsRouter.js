@@ -5,7 +5,7 @@ import {
   getStudentAssignment,
   updateStudentAssignment,
   deleteStudentAssignment,
-} from '../controllers/studentAssignmentsController.js';
+} from '../controllers/studentAssignmentsControllers.js';
 
 const router = express.Router();
 

@@ -5,7 +5,7 @@ import {
   getGradeById,
   updateGrade,
   deleteGrade,
-} from '../controllers/gradesController.js';
+} from '../controllers/gradesControllers.js';
 
 const router = express.Router();
 

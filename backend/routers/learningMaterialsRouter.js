@@ -5,7 +5,7 @@ import {
   getLearningMaterialById,
   updateLearningMaterial,
   deleteLearningMaterial,
-} from '../controllers/learningMaterialsController.js';
+} from '../controllers/learningMaterialsControllers.js';
 
 const router = express.Router();
 

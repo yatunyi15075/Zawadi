@@ -5,7 +5,7 @@ import {
   getTeacherById,
   updateTeacher,
   deleteTeacher,
-} from '../controllers/teachersController.js';
+} from '../controllers/teachersControllers.js';
 
 const router = express.Router();
 

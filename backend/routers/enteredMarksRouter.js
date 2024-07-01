@@ -5,7 +5,7 @@ import {
   getEnteredMarkById,
   updateEnteredMark,
   deleteEnteredMark,
-} from '../controllers/enteredMarksController.js';
+} from '../controllers/enteredMarksControllers.js';
 
 const router = express.Router();
 

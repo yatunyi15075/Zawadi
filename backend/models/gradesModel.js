@@ -1,6 +1,9 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import Student from './Student.js'; // Assuming Student model is imported correctly
+// import sequelize from '../config.js';
+import Student from './studentModel.js'; // Assuming Student model is imported correctly
+import config from '../config.js';
+
+const { sequelize } = config;
 
 const Grade = sequelize.define('Grade', {
   grade_id: {

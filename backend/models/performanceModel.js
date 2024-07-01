@@ -1,7 +1,10 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import Student from './Student.js'; // Assuming Student model is imported correctly
-import Class from './Class.js'; // Assuming Class model is imported correctly
+// import sequelize from '../config.js';
+import Student from './studentModel.js'; // Assuming Student model is imported correctly
+import Class from './classModel.js'; // Assuming Class model is imported correctly
+import config from '../config.js';
+
+const { sequelize } = config;
 
 const Performance = sequelize.define('Performance', {
   id: {

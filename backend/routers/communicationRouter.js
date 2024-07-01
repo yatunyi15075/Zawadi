@@ -5,7 +5,7 @@ import {
   getCommunicationById,
   updateCommunication,
   deleteCommunication,
-} from '../controllers/communicationController.js';
+} from '../controllers/communicationControllers.js';
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import Timetable from '../models/Timetable.js';
+import Timetable from '../models/timetableModel.js';
 
 // Create Timetable
 export const createTimetable = async (req, res) => {
@@ -10,7 +10,7 @@ export const createTimetable = async (req, res) => {
 
   try {
     const newTimetable = await Timetable.create({
-      class_id,
+      class_id, 
       day,
       subject,
       time,

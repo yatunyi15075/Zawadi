@@ -5,7 +5,7 @@ import {
   getAnnouncementById,
   updateAnnouncement,
   deleteAnnouncement,
-} from '../controllers/announcementController.js';
+} from '../controllers/announcementControllers.js';
 
 const router = express.Router();
 

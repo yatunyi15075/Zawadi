@@ -5,7 +5,7 @@ import {
   getCurriculumEntryById,
   updateCurriculumEntry,
   deleteCurriculumEntry,
-} from '../controllers/curriculumManagementController.js';
+} from '../controllers/curriculumManagementControllers.js';
 
 const router = express.Router();
 

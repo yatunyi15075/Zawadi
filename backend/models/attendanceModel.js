@@ -1,6 +1,9 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import Student from './Student.js'; // Ensure correct path to Student model
+// import sequelize from '../config.js';
+import Student from './studentModel.js'; // Ensure correct path to Student model
+import config from '../config.js';
+
+const { sequelize } = config;
 
 const Attendance = sequelize.define('Attendance', {
   id: {

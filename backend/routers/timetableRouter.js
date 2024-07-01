@@ -5,7 +5,7 @@ import {
   getTimetableById,
   updateTimetable,
   deleteTimetable,
-} from '../controllers/timetableController.js';
+} from '../controllers/timetableControllers.js';
 
 const router = express.Router();
 

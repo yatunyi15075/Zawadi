@@ -1,5 +1,8 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import config from '../config.js';
+import Class from './classModel.js'; // Import Class model
+
+const { sequelize } = config;
 
 const Student = sequelize.define('Student', {
   id: {
@@ -15,7 +18,7 @@ const Student = sequelize.define('Student', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Class',
+      model: Class, // Correct reference to the Class model
       key: 'id',
     },
   },

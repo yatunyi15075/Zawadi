@@ -5,7 +5,7 @@ import {
   getLessonPlanById,
   updateLessonPlan,
   deleteLessonPlan,
-} from '../controllers/lessonPlansController.js';
+} from '../controllers/lessonPlansControllers.js';
 
 const router = express.Router();
 

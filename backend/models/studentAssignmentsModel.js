@@ -1,24 +1,26 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import Student from './studentsModel.js';
-import Assignment from './assignmentsModel.js';
+import config from '../config.js';
+import Student from './studentModel.js'; // Import Student model
+import Assignment from './assignmentsModel.js'; // Import Assignment model
+
+const { sequelize } = config;
 
 const StudentAssignment = sequelize.define('StudentAssignment', {
   studentId: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     references: {
       model: Student,
-      key: 'student_id',
+      key: 'id',
     },
-    primaryKey: true,
   },
   assignmentId: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     references: {
       model: Assignment,
-      key: 'assignment_id',
+      key: 'id',
     },
-    primaryKey: true,
   },
   submissionDate: {
     type: DataTypes.DATEONLY,
@@ -29,6 +31,8 @@ const StudentAssignment = sequelize.define('StudentAssignment', {
   grade: {
     type: DataTypes.DECIMAL(5, 2),
   },
+}, {
+  tableName: 'StudentAssignments', // Ensure the correct table name here
 });
 
 export default StudentAssignment;

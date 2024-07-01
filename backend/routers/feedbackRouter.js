@@ -5,7 +5,7 @@ import {
   getFeedbackById,
   updateFeedback,
   deleteFeedback,
-} from '../controllers/feedbackController.js';
+} from '../controllers/feedbackControllers.js';
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import AttendanceRecord from '../models/AttendanceRecord.js';
+import AttendanceRecord from '../models/attendanceRecordModel.js';
 
 // Create Attendance Record
 export const createAttendanceRecord = async (req, res) => {

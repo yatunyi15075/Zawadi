@@ -23,23 +23,23 @@ import attendanceRecordRouter from './routers/attendanceRecordRouter.js';
 import assignmentsRouter from './routers/assignmentsRouter.js';
 import assessmentReportRouter from './routers/assessmentReportRouter.js';
 import announcementRouter from './routers/announcementRouter.js';
-
 import config from './config.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = config.port;
+const { sequelize } = config;
 
 app.use(express.json());
 app.use(cors());
 
 // middleware to log requests
 app.use((req, res, next) => {
-    console.log("Request Method:", req.method);
-    console.log("Request Headers:", req.headers);
-    console.log("Request Body:", req.body);
-    next();
+  console.log("Request Method:", req.method);
+  console.log("Request Headers:", req.headers);
+  console.log("Request Body:", req.body);
+  next();
 });
 
 // Routers
@@ -66,7 +66,13 @@ app.use('/api/assignments', assignmentsRouter);
 app.use('/api/assessment-reports', assessmentReportRouter);
 app.use('/api/announcements', announcementRouter);
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Sync database
+sequelize.sync()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error('Unable to connect to the database:', error);
+  });
