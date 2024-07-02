@@ -9,15 +9,23 @@ export const getAllSchools = async (req, res) => {
   }
 };
 
+
 export const createSchool = async (req, res) => {
   try {
     const { name, address, director, location, number_of_students, plan } = req.body;
+
+    if (!name || !address || !director || !location || !number_of_students || !plan) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
     const school = await School.create({ name, address, director, location, number_of_students, plan });
     res.status(201).json(school);
   } catch (error) {
+    console.error('Error creating school:', error); // Log the error
     res.status(500).json({ error: 'Failed to create school' });
   }
 };
+
 
 export const getSchoolById = async (req, res) => {
   try {

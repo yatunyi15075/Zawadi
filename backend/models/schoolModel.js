@@ -33,6 +33,9 @@ const School = sequelize.define('School', {
     type: DataTypes.ENUM('free', 'silver', 'gold'),
     allowNull: false,
   },
+}, {
+  timestamps: true, // Enable timestamps
+  tableName: 'Schools'
 });
 
 export default School;

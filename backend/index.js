@@ -17,7 +17,6 @@ import enteredMarksRouter from './routers/enteredMarksRouter.js';
 import attendanceRouter from './routers/attendanceRouter.js';
 import communicationRouter from './routers/communicationRouter.js';
 import curriculumManagementRouter from './routers/curriculumManagementRouter.js';
-import communicationController from './routers/communicationRouter.js';
 import classRouter from './routers/classRouter.js';
 import attendanceRecordRouter from './routers/attendanceRecordRouter.js';
 import assignmentsRouter from './routers/assignmentsRouter.js';
@@ -34,7 +33,7 @@ const { sequelize } = config;
 app.use(express.json());
 app.use(cors());
 
-// middleware to log requests
+// Middleware to log requests
 app.use((req, res, next) => {
   console.log("Request Method:", req.method);
   console.log("Request Headers:", req.headers);
@@ -59,7 +58,6 @@ app.use('/api/entered-marks', enteredMarksRouter);
 app.use('/api/attendance', attendanceRouter);
 app.use('/api/communications', communicationRouter);
 app.use('/api/curriculum-entries', curriculumManagementRouter);
-app.use('/api/communications', communicationController);
 app.use('/api/classes', classRouter);
 app.use('/api/attendance-records', attendanceRecordRouter);
 app.use('/api/assignments', assignmentsRouter);
