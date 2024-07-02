@@ -16,11 +16,9 @@ const Announcement = sequelize.define('Announcement', {
   section: {
     type: DataTypes.ENUM('All Parents', 'Early Years', 'Middle School', 'Junior Secondary'),
     allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+  }
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
 
 export default Announcement;
