@@ -1,3 +1,4 @@
+// curriculumManagementModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 
@@ -27,10 +28,8 @@ const CurriculumEntry = sequelize.define('CurriculumEntry', {
   timetable: {
     type: DataTypes.TEXT,
   },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
 
 export default CurriculumEntry;

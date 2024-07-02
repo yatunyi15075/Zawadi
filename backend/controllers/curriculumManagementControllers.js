@@ -1,3 +1,4 @@
+// curriculumManagementController.js
 import CurriculumEntry from '../models/curriculumManagementModel.js';
 
 // Create Curriculum Entry
