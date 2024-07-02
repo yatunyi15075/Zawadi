@@ -16,10 +16,8 @@ const Feedback = sequelize.define('Feedback', {
   content: {
     type: DataTypes.TEXT,
   },
-  date_received: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
 
 export default Feedback;

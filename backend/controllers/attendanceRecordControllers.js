@@ -22,6 +22,7 @@ export const createAttendanceRecord = async (req, res) => {
   }
 };
 
+
 // Get All Attendance Records
 export const getAllAttendanceRecords = async (req, res) => {
   try {
