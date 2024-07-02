@@ -20,11 +20,9 @@ const AssessmentReport = sequelize.define('AssessmentReport', {
   score: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+  }
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
 
 export default AssessmentReport;
