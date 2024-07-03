@@ -98,7 +98,7 @@ const LessonPlans = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      const response = await axios.get('http://localhost:5000/api/classes');
       setClasses(response.data.classes);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -128,7 +128,7 @@ const LessonPlans = () => {
 
   const fetchTimetable = async (classId) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/v1/timetable/${classId}`);
+      const response = await axios.get(`http://localhost:5000/api/timetables/${classId}`);
       setTimetable(response.data.timetable);
     } catch (error) {
       console.error('Error fetching timetable:', error);

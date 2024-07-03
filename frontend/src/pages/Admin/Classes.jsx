@@ -26,7 +26,7 @@ const Classes = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      const response = await axios.get('http://localhost:5000/api/classes');
       if (response.data && Array.isArray(response.data.classes)) {
         setClasses(response.data.classes);
       } else {
@@ -41,7 +41,7 @@ const Classes = () => {
     e.preventDefault();
     if (newClassName.trim() !== '') {
       try {
-        const response = await axios.post('http://localhost:4000/api/v1/class', { 
+        const response = await axios.post('http://localhost:5000/api/classes', { 
           grade: newClassName, 
           category: newClassCategory 
         });

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form = styled.form`
   background: #fff;
@@ -55,9 +58,10 @@ const Button = styled.button`
   }
 `;
 
-const AddSchoolForm = ({ addSchool }) => {
+const AddSchoolForm = () => {
   const [form, setForm] = useState({
     name: '',
+    address: '',
     director: '',
     location: '',
     numberOfStudents: '',
@@ -68,46 +72,66 @@ const AddSchoolForm = ({ addSchool }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addSchool(form);
-    setForm({
-      name: '',
-      director: '',
-      location: '',
-      numberOfStudents: '',
-      plan: 'free'
-    });
+    try {
+      await axios.post('http://localhost:5000/api/schools', {
+        name: form.name,
+        address: form.address,
+        director: form.director,
+        location: form.location,
+        number_of_students: form.numberOfStudents,
+        plan: form.plan
+      });
+      toast.success('School added successfully!');
+      setForm({
+        name: '',
+        address: '',
+        director: '',
+        location: '',
+        numberOfStudents: '',
+        plan: 'free'
+      });
+    } catch (error) {
+      toast.error('Failed to add school. Please try again.');
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <Label>School Name</Label>
-        <Input type="text" name="name" value={form.name} onChange={handleChange} required />
-      </FormGroup>
-      <FormGroup>
-        <Label>Director/Headmaster</Label>
-        <Input type="text" name="director" value={form.director} onChange={handleChange} required />
-      </FormGroup>
-      <FormGroup>
-        <Label>Location</Label>
-        <Input type="text" name="location" value={form.location} onChange={handleChange} required />
-      </FormGroup>
-      <FormGroup>
-        <Label>Number of Students</Label>
-        <Input type="number" name="numberOfStudents" value={form.numberOfStudents} onChange={handleChange} required />
-      </FormGroup>
-      <FormGroup>
-        <Label>Plan</Label>
-        <Select name="plan" value={form.plan} onChange={handleChange} required>
-          <option value="free">Free Plan</option>
-          <option value="silver">Silver Plan</option>
-          <option value="gold">Gold Plan</option>
-        </Select>
-      </FormGroup>
-      <Button type="submit">Add School</Button>
-    </Form>
+    <>
+      <ToastContainer />
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label>School Name</Label>
+          <Input type="text" name="name" value={form.name} onChange={handleChange} required />
+        </FormGroup>
+        <FormGroup>
+          <Label>Address</Label>
+          <Input type="text" name="address" value={form.address} onChange={handleChange} required />
+        </FormGroup>
+        <FormGroup>
+          <Label>Director/Headmaster</Label>
+          <Input type="text" name="director" value={form.director} onChange={handleChange} required />
+        </FormGroup>
+        <FormGroup>
+          <Label>Location</Label>
+          <Input type="text" name="location" value={form.location} onChange={handleChange} required />
+        </FormGroup>
+        <FormGroup>
+          <Label>Number of Students</Label>
+          <Input type="number" name="numberOfStudents" value={form.numberOfStudents} onChange={handleChange} required />
+        </FormGroup>
+        <FormGroup>
+          <Label>Plan</Label>
+          <Select name="plan" value={form.plan} onChange={handleChange} required>
+            <option value="free">Free Plan</option>
+            <option value="silver">Silver Plan</option>
+            <option value="gold">Gold Plan</option>
+          </Select>
+        </FormGroup>
+        <Button type="submit">Add School</Button>
+      </Form>
+    </>
   );
 };
 

@@ -27,7 +27,7 @@ const Teachers = () => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/teachers/getall');
+      const response = await axios.get('http://localhost:5000/api/teachers');
       setTeachers(response.data.teachers);
     } catch (error) {
       console.error('Error fetching teachers:', error);
@@ -36,7 +36,7 @@ const Teachers = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      const response = await axios.get('http://localhost:5000/api/classes');
       setAvailableClasses(response.data.classes);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -48,7 +48,7 @@ const Teachers = () => {
     const { name, email, subject, phoneNumber, classes } = newTeacher;
     if (name.trim() !== '' && email.trim() !== '' && subject.trim() !== '' && phoneNumber.trim() !== '' && classes.length > 0) {
       try {
-        const response = await axios.post('http://localhost:4000/api/v1/teachers', newTeacher);
+        const response = await axios.post('http://localhost:5000/api/teachers', newTeacher);
         const createdTeacher = response.data.teacher;
         setTeachers([...teachers, createdTeacher]);
         setNewTeacher({ name: '', email: '', subject: '', phoneNumber: '', classes: [] });
