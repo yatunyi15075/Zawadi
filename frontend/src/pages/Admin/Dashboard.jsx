@@ -4,8 +4,6 @@ import axios from 'axios';
 import {
   AdminDashboardContainer,
   Content,
-  TopContent,
-  BottomContent,
   Section,
   SectionTitle,
   CardContainer,
@@ -15,10 +13,7 @@ import {
 } from '../../styles/DashboardStyles';
 
 const AdminDashboard = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [events, setEvents] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
-  const [studentPerformance, setStudentPerformance] = useState([]);
 
   useEffect(() => {
     fetchAnnouncements();
@@ -35,30 +30,29 @@ const AdminDashboard = () => {
 
   return (
     <AdminDashboardContainer>
-      <Content isOpen={isOpen}>
-        <TopContent>
-          <Section>
-            <SectionTitle>Overview</SectionTitle>
-            <CardContainer>
-              <Card>
-                <CardTitle>Total Students</CardTitle>
-                <CardContent>500</CardContent>
-              </Card>
-              <Card>
-                <CardTitle>Total Teachers</CardTitle>
-                <CardContent>50</CardContent>
-              </Card>
-              <Card>
-                <CardTitle>Total Classes</CardTitle>
-                <CardContent>50</CardContent>
-              </Card>
-            </CardContainer>
-          </Section>
-        </TopContent>
+      <Content>
+        <Section>
+          <SectionTitle>Overview</SectionTitle>
+          <CardContainer>
+            <Card>
+              <CardTitle>Total Students</CardTitle>
+              <CardContent>500</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Total Teachers</CardTitle>
+              <CardContent>50</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Total Classes</CardTitle>
+              <CardContent>50</CardContent>
+            </Card>
+          </CardContainer>
+        </Section>
 
-        <BottomContent>
+        <Section>
+          <SectionTitle>Announcements</SectionTitle>
           <Announcement announcements={announcements} />
-        </BottomContent>
+        </Section>
       </Content>
     </AdminDashboardContainer>
   );

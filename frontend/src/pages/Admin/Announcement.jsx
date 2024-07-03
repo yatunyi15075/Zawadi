@@ -16,47 +16,57 @@ import {
   AnnouncementItem,
   AnnouncementContent,
   Select,
-} from '../../styles/AnnouncementStyles';
+  ActionButtons,
+} from '../../styles/AnnouncementStyles'; // Ensure you have styles imported correctly
 
 const Announcement = () => {
-  // State for managing announcement
   const [announcement, setAnnouncement] = useState('');
   const [announcements, setAnnouncements] = useState([]);
   const [selectedSection, setSelectedSection] = useState('Early Years');
-
-  // Function to fetch announcements
-  const fetchAnnouncements = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/announcements');
-      setAnnouncements(response.data.announcements);
-    } catch (error) {
-      console.error('Error fetching announcements:', error);
-    }
-  };
 
   useEffect(() => {
     fetchAnnouncements();
   }, []);
 
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/announcements');
+      setAnnouncements(response.data);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/announcements', {
-        announcement: announcement, // Ensure that the key matches the backend model
-        section: selectedSection, // Include the selected section
+        announcement: announcement,
+        section: selectedSection,
       });
-      console.log('Announcement sent:', response.data);
-      // Display success toast message
       toast.success('Announcement sent successfully');
-      // Clear the form
       setAnnouncement('');
-      // Fetch announcements again to update the list
       fetchAnnouncements();
     } catch (error) {
       console.error('Error sending announcement:', error);
-      // Display error toast message
       toast.error('Error sending announcement');
     }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/announcements/${id}`);
+      toast.success('Announcement deleted successfully');
+      fetchAnnouncements();
+    } catch (error) {
+      console.error('Error deleting announcement:', error);
+      toast.error('Error deleting announcement');
+    }
+  };
+
+  const handleEdit = async (id) => {
+    // Implement edit functionality if needed
+    console.log('Edit announcement with id:', id);
   };
 
   return (
@@ -65,7 +75,6 @@ const Announcement = () => {
       <Sidebar />
       <Content>
         <Title>Announcement</Title>
-        {/* Announcement Form */}
         <AnnouncementForm onSubmit={handleSubmit}>
           <FormGroup>
             <Label htmlFor="section">Select Section:</Label>
@@ -74,7 +83,7 @@ const Announcement = () => {
               value={selectedSection}
               onChange={(e) => setSelectedSection(e.target.value)}
               required
-            > 
+            >
               <option value="All Parents">All Parents</option>
               <option value="Early Years">Early Years</option>
               <option value="Middle School">Middle School</option>
@@ -95,14 +104,17 @@ const Announcement = () => {
           <Button type="submit">Send Announcement</Button>
         </AnnouncementForm>
 
-        {/* Display Announcements */}
         <h2>Announcements</h2>
         <AnnouncementList>
           {announcements.map((announcement) => (
-            <AnnouncementItem key={announcement._id}>
+            <AnnouncementItem key={announcement.id}>
               <AnnouncementContent>
                 {announcement.announcement} (Section: {announcement.section})
               </AnnouncementContent>
+              <ActionButtons>
+                <Button onClick={() => handleEdit(announcement.id)}>Edit</Button>
+                <Button onClick={() => handleDelete(announcement.id)}>Delete</Button>
+              </ActionButtons>
             </AnnouncementItem>
           ))}
         </AnnouncementList>

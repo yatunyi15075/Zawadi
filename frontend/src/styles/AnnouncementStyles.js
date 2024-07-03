@@ -1,4 +1,3 @@
-// AnnouncementStyles.js
 import styled from 'styled-components';
 
 export const AnnouncementContainer = styled.div`
@@ -49,6 +48,14 @@ export const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+export const ActionButtons = styled.div`
+  /* Your styles for action buttons */
 `;
 
 export const AnnouncementList = styled.ul`
@@ -68,12 +75,10 @@ export const SidebarContainer = styled.div`
   flex: 0 0 250px; /* Sidebar width */
 `;
 
-
 export const AnnouncementHeader = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
 `;
-
 
 export const AnnouncementTitle = styled.h3`
   margin-bottom: 10px;

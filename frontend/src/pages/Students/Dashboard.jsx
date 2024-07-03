@@ -1,7 +1,14 @@
-// StudentDashboard.js
 import React from 'react';
-import { StudentDashboardContainer, Content, Section, SectionTitle, CardContainer, Card, CardTitle, CardContent } 
-from '../../styles/DashboardStyles';
+import {
+  StudentDashboardContainer,
+  Content,
+  Section,
+  SectionTitle,
+  CardContainer,
+  Card,
+  CardTitle,
+  CardContent,
+} from '../../styles/DashboardStyles';
 
 const StudentDashboard = () => {
   return (
@@ -35,7 +42,7 @@ const StudentDashboard = () => {
           {/* Add a calendar or list of upcoming events */}
         </Section>
       </Content>
-    </StudentDashboardContainer> 
+    </StudentDashboardContainer>
   );
 };
 

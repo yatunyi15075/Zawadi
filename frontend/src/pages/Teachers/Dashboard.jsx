@@ -1,7 +1,14 @@
-// TeacherDashboard.js
 import React from 'react';
-import { TeacherDashboardContainer, Content, Section, SectionTitle, CardContainer, Card, CardTitle, CardContent } 
-from '../../styles/DashboardStyles';
+import {
+  TeacherDashboardContainer,
+  Content,
+  Section,
+  SectionTitle,
+  CardContainer,
+  Card,
+  CardTitle,
+  CardContent,
+} from '../../styles/DashboardStyles';
 
 const TeacherDashboard = () => {
   return (
