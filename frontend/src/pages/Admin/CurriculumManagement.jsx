@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
@@ -66,6 +67,25 @@ const TextArea = styled.textarea`
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+`;
+
+const AllCurriculumsButton = styled(Link)`
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+        background-color: #0056b3;
+    }
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 `;
 
 const CurriculumManagement = () => {
@@ -200,6 +220,7 @@ const CurriculumManagement = () => {
                         <Button onClick={() => deleteCurriculumEntry(entry.id)}>Delete</Button>
                     </CurriculumSection>
                 ))}
+            <AllCurriculumsButton to="/admin/all-curriculums">All Curriculums</AllCurriculumsButton>
         </Container>
     );
 }

@@ -25,6 +25,8 @@ import Analytics from './pages/Admin/Analytics.jsx';
 import CurriculumManagement from './pages/Admin/CurriculumManagement.jsx';
 import Reports from './pages/Admin/Reports.jsx';
 import Students from './pages/Admin/Students.jsx';
+import AllCurriculums from "./pages/Admin/AllCurriculums.jsx";
+
 
 // Students
 import StudentAssignments from '../src/pages/Students/Assignments';
@@ -85,6 +87,7 @@ const App = () => {
         <Route exact path="/admin/curriculum-management" element={<Layout><CurriculumManagement /></Layout>} />
         <Route exact path="/admin/reports" element={<Layout><Reports /></Layout>} />
         <Route exact path="/admin/settings" element={<Layout><SettingsProfile /></Layout>} />
+        <Route exact path="/admin/all-curriculums" element={<AllCurriculums />} />
 
         {/* Student section routes */}
         <Route exact path="/student/assignments" element={<Layout><StudentAssignments /></Layout>} />
