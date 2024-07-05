@@ -1,4 +1,3 @@
-// Teachers.jsx
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
@@ -13,7 +12,6 @@ import {
   AddTeacherForm,
   AddTeacherInput,
   AddTeacherButton,
-  Select,
   ActionButtons, // Styled component for action buttons
 } from '../../styles/TeachersStyles'; // Import styled components from TeachersStyles.js
 
@@ -123,7 +121,21 @@ const Teachers = () => {
           <TeacherList>
             {teachers.map((teacher) => (
               <TeacherItem key={teacher.id}>
-                {teacher.name} - {teacher.email} - {teacher.phone} - {teacher.address} - {teacher.qualification}
+                <div>
+                  <strong>Name:</strong> {teacher.name}
+                </div>
+                <div>
+                  <strong>Email:</strong> {teacher.email}
+                </div>
+                <div>
+                  <strong>Phone:</strong> {teacher.phone}
+                </div>
+                <div>
+                  <strong>Address:</strong> {teacher.address}
+                </div>
+                <div>
+                  <strong>Qualification:</strong> {teacher.qualification}
+                </div>
                 <ActionButtons>
                   <FaEdit onClick={() => handleEditTeacher(teacher.id)} />
                   <FaTrash onClick={() => handleDeleteTeacher(teacher.id)} />
