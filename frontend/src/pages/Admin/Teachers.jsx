@@ -1,7 +1,8 @@
-// Teachers.js
+// Teachers.jsx
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
+import { FaTrash, FaEdit } from 'react-icons/fa'; // Importing react-icons
 import {
   TeachersContainer,
   Content,
@@ -13,10 +14,11 @@ import {
   AddTeacherInput,
   AddTeacherButton,
   Select,
+  ActionButtons, // Styled component for action buttons
 } from '../../styles/TeachersStyles'; // Import styled components from TeachersStyles.js
 
 const Teachers = () => {
-  const [newTeacher, setNewTeacher] = useState({ name: '', email: '', subject: '', phoneNumber: '', classes: [] });
+  const [newTeacher, setNewTeacher] = useState({ name: '', email: '', phone: '', address: '', qualification: '' });
   const [teachers, setTeachers] = useState([]);
   const [availableClasses, setAvailableClasses] = useState([]);
 
@@ -28,7 +30,7 @@ const Teachers = () => {
   const fetchTeachers = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/teachers');
-      setTeachers(response.data.teachers);
+      setTeachers(response.data);
     } catch (error) {
       console.error('Error fetching teachers:', error);
     }
@@ -37,7 +39,7 @@ const Teachers = () => {
   const fetchClasses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/classes');
-      setAvailableClasses(response.data.classes);
+      setAvailableClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
     }
@@ -45,22 +47,38 @@ const Teachers = () => {
 
   const handleAddTeacher = async (e) => {
     e.preventDefault();
-    const { name, email, subject, phoneNumber, classes } = newTeacher;
-    if (name.trim() !== '' && email.trim() !== '' && subject.trim() !== '' && phoneNumber.trim() !== '' && classes.length > 0) {
+    const { name, email, phone, address, qualification } = newTeacher;
+    if (name.trim() !== '' && email.trim() !== '') {
       try {
-        const response = await axios.post('http://localhost:5000/api/teachers', newTeacher);
-        const createdTeacher = response.data.teacher;
+        const response = await axios.post('http://localhost:5000/api/teachers', {
+          name,
+          email,
+          phone,
+          address,
+          qualification,
+        });
+        const createdTeacher = response.data;
         setTeachers([...teachers, createdTeacher]);
-        setNewTeacher({ name: '', email: '', subject: '', phoneNumber: '', classes: [] });
+        setNewTeacher({ name: '', email: '', phone: '', address: '', qualification: '' });
       } catch (error) {
         console.error('Error adding teacher:', error);
       }
     }
   };
 
-  const handleClassChange = (e) => {
-    const selectedClasses = Array.from(e.target.selectedOptions, (option) => option.value);
-    setNewTeacher({ ...newTeacher, classes: selectedClasses });
+  const handleDeleteTeacher = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/teachers/${id}`);
+      const updatedTeachers = teachers.filter((teacher) => teacher.id !== id);
+      setTeachers(updatedTeachers);
+    } catch (error) {
+      console.error('Error deleting teacher:', error);
+    }
+  };
+
+  const handleEditTeacher = async (id) => {
+    // Implement edit functionality as per your requirement
+    console.log('Edit teacher with id:', id);
   };
 
   return (
@@ -84,27 +102,32 @@ const Teachers = () => {
             />
             <AddTeacherInput
               type="text"
-              placeholder="Enter teacher subject"
-              value={newTeacher.subject}
-              onChange={(e) => setNewTeacher({ ...newTeacher, subject: e.target.value })}
+              placeholder="Enter teacher phone"
+              value={newTeacher.phone}
+              onChange={(e) => setNewTeacher({ ...newTeacher, phone: e.target.value })}
             />
             <AddTeacherInput
               type="text"
-              placeholder="Enter teacher phone number"
-              value={newTeacher.phoneNumber}
-              onChange={(e) => setNewTeacher({ ...newTeacher, phoneNumber: e.target.value })}
+              placeholder="Enter teacher address"
+              value={newTeacher.address}
+              onChange={(e) => setNewTeacher({ ...newTeacher, address: e.target.value })}
             />
-            <Select multiple value={newTeacher.classes} onChange={handleClassChange}>
-              {availableClasses.map((classItem) => (
-                <option key={classItem._id} value={classItem.grade}>{classItem.grade}</option>
-              ))}
-            </Select>
+            <AddTeacherInput
+              type="text"
+              placeholder="Enter teacher qualification"
+              value={newTeacher.qualification}
+              onChange={(e) => setNewTeacher({ ...newTeacher, qualification: e.target.value })}
+            />
             <AddTeacherButton type="submit">Add Teacher</AddTeacherButton>
           </AddTeacherForm>
           <TeacherList>
             {teachers.map((teacher) => (
               <TeacherItem key={teacher.id}>
-                {teacher.name} - {teacher.email} - {teacher.subject} - {teacher.phoneNumber} - {teacher.classes.join(', ')}
+                {teacher.name} - {teacher.email} - {teacher.phone} - {teacher.address} - {teacher.qualification}
+                <ActionButtons>
+                  <FaEdit onClick={() => handleEditTeacher(teacher.id)} />
+                  <FaTrash onClick={() => handleDeleteTeacher(teacher.id)} />
+                </ActionButtons>
               </TeacherItem>
             ))}
           </TeacherList>

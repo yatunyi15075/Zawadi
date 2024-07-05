@@ -2,7 +2,7 @@ import Student from '../models/studentModel.js';
 
 // Create Student
 export const createStudent = async (req, res) => {
-  const { name, class_id } = req.body;
+  const { name, class_id, registrationNumber, grade, parentName, parentEmail, parentPhone } = req.body;
 
   if (!name || !class_id) {
     return res.status(400).json({ error: 'Name and class ID are required' });
@@ -12,6 +12,11 @@ export const createStudent = async (req, res) => {
     const newStudent = await Student.create({
       name,
       class_id,
+      registrationNumber,
+      grade,
+      parentName,
+      parentEmail,
+      parentPhone,
     });
     res.status(201).json(newStudent);
   } catch (error) {
@@ -48,7 +53,7 @@ export const getStudentById = async (req, res) => {
 // Update Student
 export const updateStudent = async (req, res) => {
   const { id } = req.params;
-  const { name, class_id } = req.body;
+  const { name, class_id, registrationNumber, grade, parentName, parentEmail, parentPhone } = req.body;
 
   try {
     const existingStudent = await Student.findByPk(id);
@@ -56,6 +61,11 @@ export const updateStudent = async (req, res) => {
       await existingStudent.update({
         name,
         class_id,
+        registrationNumber,
+        grade,
+        parentName,
+        parentEmail,
+        parentPhone,
       });
       res.json({ message: 'Student updated successfully' });
     } else {

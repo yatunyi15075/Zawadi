@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
     logging: console.log, // Enable logging
   }
 );
-
+ 
 sequelize.authenticate()
   .then(() => {
     console.log('Connected to the database.');
