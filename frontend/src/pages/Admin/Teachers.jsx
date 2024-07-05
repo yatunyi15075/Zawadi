@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-import { FaTrash, FaEdit } from 'react-icons/fa'; // Importing react-icons
+import { FaTrash, FaEdit } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css'; // Import default styles
 import {
   TeachersContainer,
   Content,
@@ -12,8 +14,8 @@ import {
   AddTeacherForm,
   AddTeacherInput,
   AddTeacherButton,
-  ActionButtons, // Styled component for action buttons
-} from '../../styles/TeachersStyles'; // Import styled components from TeachersStyles.js
+  ActionButtons,
+} from '../../styles/TeachersStyles';
 
 const Teachers = () => {
   const [newTeacher, setNewTeacher] = useState({ name: '', email: '', phone: '', address: '', qualification: '' });
@@ -58,9 +60,13 @@ const Teachers = () => {
         const createdTeacher = response.data;
         setTeachers([...teachers, createdTeacher]);
         setNewTeacher({ name: '', email: '', phone: '', address: '', qualification: '' });
+        toast.success('Teacher added successfully'); // Display success message
       } catch (error) {
         console.error('Error adding teacher:', error);
+        toast.error('Error adding teacher'); // Display error message
       }
+    } else {
+      toast.error('Name and Email are required'); // Display validation error message
     }
   };
 
@@ -69,18 +75,20 @@ const Teachers = () => {
       await axios.delete(`http://localhost:5000/api/teachers/${id}`);
       const updatedTeachers = teachers.filter((teacher) => teacher.id !== id);
       setTeachers(updatedTeachers);
+      toast.success('Teacher deleted successfully'); // Display success message
     } catch (error) {
       console.error('Error deleting teacher:', error);
+      toast.error('Error deleting teacher'); // Display error message
     }
   };
 
   const handleEditTeacher = async (id) => {
-    // Implement edit functionality as per your requirement
     console.log('Edit teacher with id:', id);
   };
 
   return (
     <TeachersContainer>
+      <ToastContainer /> {/* Include ToastContainer here */}
       <Sidebar />
       <Content>
         <TeachersContent>
