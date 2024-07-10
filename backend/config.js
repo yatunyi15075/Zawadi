@@ -1,4 +1,3 @@
-// config.js
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
@@ -14,19 +13,20 @@ const sequelize = new Sequelize(
     logging: console.log, // Enable logging
   }
 );
- 
+
 sequelize.authenticate()
   .then(() => {
     console.log('Connected to the database.');
-    console.log('Database Object:', sequelize); // Debugging: Log the sequelize object
   })
   .catch(error => {
     console.error('Error connecting to the database:', error.message);
   });
 
+const jwtSecret = process.env.JWT_SECRET;
+
 const config = {
   sequelize,
-  jwtSecret: process.env.JWT_SECRET,
+  jwtSecret,
   port: process.env.PORT || 5000,
 };
 

@@ -1,29 +1,35 @@
+// controllers/userController.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from '../config.js';
-import * as UserModel from '../models/userModel.js';
+import User from '../models/userModel.js';
 
-const jwtSecret = config.jwtSecret;
+const { jwtSecret } = config;
 
-// Register User
-export const registerUser = async (req, res) => {
-  const { fullName, email, password } = req.body;
+// Register Super-admin
+export const registerSuperAdmin = async (req, res) => {
+  const { username, email, password } = req.body;
 
-  if (!fullName || !email || !password) {
+  if (!username || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userId = await UserModel.createUser(fullName, email, hashedPassword);
-    res.status(201).json({ message: 'User registered successfully', userId });
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      role: 'super-admin',
+    });
+    res.status(201).json({ message: 'Super-admin registered successfully', userId: user.id });
   } catch (error) {
-    res.status(500).json({ error: 'User registration failed', details: error.message });
+    res.status(500).json({ error: 'Super-admin registration failed', details: error.message });
   }
 };
 
-// Login User
-export const loginUser = async (req, res) => {
+// Login
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -31,7 +37,7 @@ export const loginUser = async (req, res) => {
   }
 
   try {
-    const user = await UserModel.getUserByEmail(email);
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -43,55 +49,78 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    if (!jwtSecret) {
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-
-    const token = jwt.sign({ userId: user.id }, jwtSecret, { expiresIn: '1h' });
-    res.status(200).json({ message: 'Login successful', token });
+    const token = jwt.sign({ userId: user.id, role: user.role }, jwtSecret, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {
     res.status(500).json({ error: 'Login failed', details: error.message });
   }
 };
 
-// Additional controllers
-export const getAllUsers = async (req, res) => {
+// Create Admin by Super-admin
+export const createAdmin = async (req, res) => {
+  const { username, email, password, school_id } = req.body;
+
+  if (!username || !email || !password || !school_id) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
   try {
-    const users = await UserModel.getAllUsers();
-    res.json(users);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      role: 'admin',
+      school_id,
+    });
+    res.status(201).json({ message: 'Admin created successfully', userId: user.id });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve users' });
+    res.status(500).json({ error: 'Admin creation failed', details: error.message });
   }
 };
 
-export const getUserById = async (req, res) => {
+// Create Teacher by Admin
+export const createTeacher = async (req, res) => {
+  const { username, email, password, school_id } = req.body;
+
+  if (!username || !email || !password || !school_id) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
   try {
-    const user = await UserModel.getUserById(req.params.id);
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      role: 'teacher',
+      school_id,
+    });
+    res.status(201).json({ message: 'Teacher created successfully', userId: user.id });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve user' });
+    res.status(500).json({ error: 'Teacher creation failed', details: error.message });
   }
 };
 
-export const updateUser = async (req, res) => {
-  try {
-    const updates = req.body;
-    await UserModel.updateUser(req.params.id, updates);
-    res.json({ message: 'User updated successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to update user', details: error.message });
-  }
-};
+// Create Parent by Admin
+export const createParent = async (req, res) => {
+  const { username, email, password, school_id } = req.body;
 
-export const deleteUser = async (req, res) => {
+  if (!username || !email || !password || !school_id) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
   try {
-    await UserModel.deleteUser(req.params.id);
-    res.status(204).end();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      role: 'parent',
+      school_id,
+    });
+    res.status(201).json({ message: 'Parent created successfully', userId: user.id });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete user' });
+    res.status(500).json({ error: 'Parent creation failed', details: error.message });
   }
 };

@@ -49,7 +49,7 @@ app.use('/api/students', studentRouter);
 app.use('/api/student-assignments', studentAssignmentsRouter);
 app.use('/api/schools', schoolRouter);
 app.use('/api/progress', progressRouter);
-app.use('/api/performances', performanceRouter);
+app.use('/api/performances', performanceRouter); 
 app.use('/api/lesson-plans', lessonPlansRouter);
 app.use('/api/learning-materials', learningMaterialsRouter);
 app.use('/api/grades', gradesRouter);

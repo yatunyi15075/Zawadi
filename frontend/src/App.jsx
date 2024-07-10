@@ -4,7 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../src/components/Home/Home.jsx';
 import ChooseUser from '../src/components/ChooseUser';
 
+//protected routes
+import ProtectedRoute from './auth/ProtectedRoute.jsx';
+
 // Signin and Register
+import Register from './auth/SuperAdmin/SuperAdminRegister.jsx';
+import Login from './auth/SuperAdmin/SuperAdminSigin.jsx';
 import AdminSignIn from '../src/auth/Admin/AdminSignIn.jsx';
 import StudentSignIn from '../src/auth/Student/StudentSignIn.jsx';
 import TeacherSignIn from '../src/auth/Teacher/TeacherSignIn.jsx';
@@ -70,6 +75,11 @@ const App = () => {
         <Route exact path="/admin-signIn" element={<AdminSignIn />} />
         <Route exact path="/student-signIn" element={<StudentSignIn />} />
         <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
+        {/* <Route path='/' element={<Navigate to="/login" />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='*' element={<Navigate to="/login" />} /> */}
 
         {/* Dashboard routes */}
         <Route exact path="/admin/dashboard" element={<Layout><AdminDashboard /></Layout>} />

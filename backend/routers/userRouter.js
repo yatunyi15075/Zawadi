@@ -1,21 +1,18 @@
 import express from 'express';
 import {
-  registerUser,
-  loginUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
+  registerSuperAdmin,
+  login,
+  createAdmin,
+  createTeacher,
+  createParent,
 } from '../controllers/userControllers.js';
 
 const router = express.Router();
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-
-router.get('/', getAllUsers);
-router.get('/:id', getUserById);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.post('/register-super-admin', registerSuperAdmin);
+router.post('/login', login);
+router.post('/create-admin', createAdmin);
+router.post('/create-teacher', createTeacher);
+router.post('/create-parent', createParent);
 
 export default router;

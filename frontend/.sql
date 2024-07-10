@@ -92,12 +92,11 @@
 
 
 -- SUPER-ADMIN
-
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('super-admin', 'admin', 'teacher', 'student') NOT NULL,
+    role ENUM('super-admin', 'admin', 'teacher', 'parent') NOT NULL,
     school_id INT,
     FOREIGN KEY (school_id) REFERENCES Schools(id)
 );
@@ -143,7 +142,7 @@ CREATE TABLE AttendanceRecords (
     attendance_date DATE NOT NULL,
     status ENUM('Present', 'Absent') NOT NULL,
     school_id INT,
-    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (school_id) REFERENCES Schools(id)
 );
 
@@ -293,4 +292,14 @@ CREATE TABLE learning_materials (
     title VARCHAR(100) NOT NULL,
     description TEXT,
     link VARCHAR(255)
+);
+
+-- PARENT-STUDENT RELATIONSHIP
+
+CREATE TABLE Parent_Student (
+    parent_id INT,
+    student_id INT,
+    PRIMARY KEY (parent_id, student_id),
+    FOREIGN KEY (parent_id) REFERENCES Users(id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
 );

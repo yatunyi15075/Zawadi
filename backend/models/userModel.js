@@ -1,39 +1,41 @@
+// models/userModel.js
+import { Sequelize, DataTypes } from 'sequelize';
 import config from '../config.js';
+import School from '../models/schoolModel.js'; // Import the School model
 
-const db = config.db;
+const sequelize = config.sequelize;
 
-// Function to create a new user
-export const createUser = async (fullName, email, password) => {
-  const [result] = await db.execute(
-    'INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)',
-    [fullName, email, password]
-  );
-  return result.insertId; 
-};
+const User = sequelize.define('User', {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  role: {
+    type: DataTypes.ENUM('super-admin', 'admin', 'teacher', 'parent'),
+    allowNull: false,
+  },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true, // Optional for super-admin
+    references: {
+      model: School, // Correct reference to the School model
+      key: 'id',
+    },
+  },
+}, {
+  timestamps: true, // Enable timestamps
+  createdAt: 'timestamp',
+  updatedAt: 'timestamp',
+});
 
-// Function to get a user by email
-export const getUserByEmail = async (email) => {
-  const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
-  return rows[0];
-};
-
-// Additional functions for managing users
-export const getAllUsers = async () => {
-  const [rows] = await db.execute('SELECT * FROM users');
-  return rows;
-};
-
-export const getUserById = async (id) => {
-  const [rows] = await db.execute('SELECT * FROM users WHERE id = ?', [id]);
-  return rows[0];
-};
-
-export const updateUser = async (id, updates) => {
-  const fields = Object.keys(updates).map(key => `${key} = ?`).join(', ');
-  const values = Object.values(updates);
-  await db.execute(`UPDATE users SET ${fields} WHERE id = ?`, [...values, id]);
-};
-
-export const deleteUser = async (id) => {
-  await db.execute('DELETE FROM users WHERE id = ?', [id]);
-};
+export default User;
