@@ -1,55 +1,41 @@
-// AdminSignInStyles.js
+// src/styles/AdminSignInStyles.js
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const AdminSignInContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(45deg, #FF69B4, #FFA07A, #90EE90); /* Gradient background */
-  min-height: 100vh; /* Full height of the viewport */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin: 3rem;
 `;
 
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 80%;
-  max-width: 300px; /* Limit form width */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
 `;
 
 export const InputField = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 1rem;
 `;
 
-export const SubmitButton = styled(Link)`
-  width: 100%;
-  padding: 12px;
-  margin-top: 20px;
+export const SubmitButton = styled.button`
+  padding: 0.75rem;
   border: none;
-  border-radius: 8px;
-  background-color: #FF4500;
+  border-radius: 5px;
+  background-color: #007bff;
   color: white;
-  font-size: 18px;
-  text-decoration: none;
-  text-align: center;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #FF6347;
-  }
-  
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
+    background-color: #0056b3;
   }
 `;

@@ -1,107 +1,66 @@
+// src/styles/LoginStyles.js
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #3b82f6;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
 `;
 
 export const LoginBox = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  padding: 32px;
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent for glossy effect */
-  backdrop-filter: blur(10px); /* Blurring the background for glossy effect */
-  border-radius: 16px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-
-  @media (max-width: 600px) {
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
 `;
 
 export const Logo = styled.img`
-  display: block;
-  margin: 0 auto 16px;
-  width: 96px;
-  height: 96px;
-
-  @media (max-width: 600px) {
-    width: 80px;
-  }
+  width: 80px;
+  margin-bottom: 1rem;
 `;
 
 export const Title = styled.h2`
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 16px;
-  color: white;
-
-  @media (max-width: 600px) {
-    font-size: 1.5rem;
-  }
+  margin-bottom: 1rem;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  width: 100%;
 `;
 
 export const Input = styled.input`
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 14px;
-
-  &:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-  }
-
-  @media (max-width: 600px) {
-    padding: 10px;
-  }
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 `;
 
 export const Button = styled.button`
-  padding: 12px;
-  background-color: #2563eb;
-  color: white;
+  padding: 0.75rem;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
   cursor: pointer;
-  text-align: center;
-  width: 100%;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &:hover {
-    background-color: #1d4ed8;
-  }
-
-  @media (max-width: 600px) {
-    padding: 10px;
-    font-size: 1rem;
+    background-color: #0056b3;
   }
 `;
 
 export const StyledLink = styled(Link)`
-  color: #2563eb;
-  font-size: 14px;
-  text-align: center;
-  display: block;
-  margin-top: 8px;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
@@ -109,75 +68,7 @@ export const StyledLink = styled(Link)`
 `;
 
 export const Divider = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 16px 0;
-
-  &::before,
-  &::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background-color: #d1d5db;
-  }
-
-  &::before {
-    margin-right: 8px;
-  }
-
-  &::after {
-    margin-left: 8px;
-  }
-
-  @media (max-width: 600px) {
-    margin: 15px 0;
-    font-size: 0.8rem;
-
-    &::before,
-    &::after {
-      width: 30%;
-    }
-  }
-`;
-
-export const SocialButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    gap: 10px;
-  }
-`;
-
-export const SocialButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
-  background-color: white;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
+  margin-top: 1rem;
   width: 100%;
-  height: 48px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #f3f4f6;
-  }
-
-  svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
-
-  @media (max-width: 600px) {
-    padding: 10px;
-    font-size: 1rem;
-    width: 100%;
-  }
+  text-align: center;
 `;

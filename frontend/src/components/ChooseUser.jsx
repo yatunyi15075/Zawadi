@@ -12,7 +12,7 @@ const ChooseUser = () => {
       </UserSection>
       <UserSection>
         <Title>Student/ Parent</Title>
-        <Button to="/student-signIn">Login as Student/ Parent</Button>
+        <Button to="/parent-signIn">Login as Student/ Parent</Button>
       </UserSection>
       <UserSection>
         <Title>Teacher</Title>

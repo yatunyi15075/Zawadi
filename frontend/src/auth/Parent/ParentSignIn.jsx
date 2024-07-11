@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import {
-  TeacherSignInContainer,
+  ParentSignInContainer,
   FormContainer,
   InputField,
   SubmitButton,
-} from '../../styles/TeacherSignInStyles';
+} from '../../styles/ParentSignInStyle';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-const TeacherSignIn = () => {
+const ParentSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ const TeacherSignIn = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
       if (response.status === 200) {
-        // Sign-in successful, redirect to teacher dashboard
-        navigate('/teacher/dashboard');
+        // Sign-in successful, redirect to parent dashboard
+        navigate('/students/dashboard');
         toast.success('Logged in successfully!');
       } else {
         // Handle sign-in errors
@@ -36,9 +36,9 @@ const TeacherSignIn = () => {
   };
 
   return (
-    <TeacherSignInContainer>
+    <ParentSignInContainer>
       <ToastContainer />
-      <h2>Teacher Sign In</h2>
+      <h2>Parent Sign In</h2>
       <FormContainer>
         <InputField
           type="email"
@@ -56,8 +56,8 @@ const TeacherSignIn = () => {
         />
         <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
       </FormContainer>
-    </TeacherSignInContainer>
+    </ParentSignInContainer>
   );
 };
 
-export default TeacherSignIn;
+export default ParentSignIn;

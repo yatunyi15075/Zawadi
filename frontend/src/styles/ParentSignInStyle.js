@@ -1,7 +1,7 @@
-// src/styles/TeacherSignInStyles.js
+// src/styles/ParentSignInStyles.js
 import styled from 'styled-components';
 
-export const TeacherSignInContainer = styled.div`
+export const ParentSignInContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

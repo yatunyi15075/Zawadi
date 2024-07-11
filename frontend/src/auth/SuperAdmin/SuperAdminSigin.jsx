@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   LoginBox,
@@ -13,16 +13,13 @@ import {
   Button,
   StyledLink,
   Divider,
-  SocialButtons,
-  SocialButton,
 } from '../../styles/LoginStyles';
 
-import bg1 from "../../assets/bg1.png";
+import bg1 from '../../assets/bg1.png';
 
 const Login = () => {
-  const [email, setEmail] = useState(''); 
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -34,15 +31,29 @@ const Login = () => {
       // Store the JWT token in local storage
       localStorage.setItem('token', response.data.token);
 
+      // Determine the role and redirect accordingly
+      switch (response.data.user.role) {
+        case 'super-admin':
+          navigate('/super-admin/dashboard');
+          break;
+        case 'admin':
+          navigate('/admin/dashboard');
+          break;
+        case 'teacher':
+          navigate('/teacher/dashboard');
+          break;
+        case 'parent':
+          navigate('/students/dashboard');
+          break;
+        default:
+          // Redirect to a default dashboard or handle other roles as needed
+          break;
+      }
+
       // Display success toast message
       toast.success('Logged in successfully!');
-
-      // Redirect to the home page or dashboard
-      navigate('/dashboard');
     } catch (error) {
       console.error(error.response.data);
-      setError(error.response.data.error);
-
       // Display error toast message
       toast.error('Failed to login. Please check your credentials.');
     }
@@ -50,16 +61,27 @@ const Login = () => {
 
   console.log('Rendering Login component'); // Debugging line
 
-
   return (
     <Container>
       <ToastContainer />
       <LoginBox>
-        <Logo src={logo} alt="Your logo" />
+        <Logo src={bg1} alt="Your logo" />
         <Title>Login</Title>
         <Form onSubmit={handleSubmit}>
-          <Input type="email" placeholder="Email address" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            type="email"
+            placeholder="Email address"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Button type="submit">Login</Button>
         </Form>
         <Divider>

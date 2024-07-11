@@ -64,7 +64,7 @@ app.use('/api/assignments', assignmentsRouter);
 app.use('/api/assessment-reports', assessmentReportRouter);
 app.use('/api/announcements', announcementRouter);
 
-// Sync database
+// Sync database 
 sequelize.sync()
   .then(() => {
     app.listen(PORT, () => {

@@ -49,7 +49,10 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
+    // Include role in the JWT payload
     const token = jwt.sign({ userId: user.id, role: user.role }, jwtSecret, { expiresIn: '1h' });
+    
+    // Respond with token and role
     res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {
     res.status(500).json({ error: 'Login failed', details: error.message });

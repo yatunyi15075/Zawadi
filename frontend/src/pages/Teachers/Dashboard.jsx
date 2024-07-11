@@ -1,4 +1,5 @@
 import React from 'react';
+import TeacherSidebar from './Sidebar';
 import {
   TeacherDashboardContainer,
   Content,
@@ -13,6 +14,7 @@ import {
 const TeacherDashboard = () => {
   return (
     <TeacherDashboardContainer>
+      <TeacherSidebar />
       <Content>
         <Section>
           <SectionTitle>Overview</SectionTitle>
